@@ -1,3 +1,4 @@
+import { User } from "@prisma/client";
 import { Request, Response } from "express";
 import * as userService from "../services/userService.js";
 
@@ -10,7 +11,7 @@ export async function login(req: Request, res: Response) {
 }
 
 export async function create(req: Request, res: Response) {
-  const data = req.body;
+  const data = req.body as User;
 
   await userService.create(data);
 

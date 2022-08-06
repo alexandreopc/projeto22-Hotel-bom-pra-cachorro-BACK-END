@@ -5,6 +5,7 @@ export const createUser = Joi.object<CreateUser>({
   email: Joi.string().email().required(),
   password: Joi.string().required(),
   name: Joi.string().required(),
+  cpf: Joi.string().required(),
   phoneNumber: Joi.string().required(),
 });
 

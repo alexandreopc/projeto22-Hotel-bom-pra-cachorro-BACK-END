@@ -12,6 +12,7 @@ model User {
   email       String   @unique
   password    String
   name        String
+  cpf         String   @unique
   phoneNumber String   @unique
   createdAt   DateTime @default(now())
 
@@ -24,7 +25,7 @@ model User {
 model Dog {
   id          Int      @id @default(autoincrement())
   name        String
-  description String
+  description String?
   weight      Float
   user        User     @relation(fields: [userId], references: [id])
   userId      Int
@@ -37,7 +38,7 @@ model Dog {
 
 model Reservation {
   id        Int      @id @default(autoincrement())
-  isExpired Boolean
+  isExpired Boolean  @default(false)
   checkIn   DateTime
   checkout  DateTime
   room      Room     @relation(fields: [roomId], references: [id])
@@ -53,7 +54,7 @@ model Reservation {
 
 model Room {
   id         Int     @id @default(autoincrement())
-  isReserved Boolean
+  isReserved Boolean @default(false)
 
   reservations Reservation[]
   images       Image[]
@@ -63,7 +64,6 @@ model Room {
 
 model Image {
   id     Int    @id @default(autoincrement())
-  name   String
   link   String
   room   Room   @relation(fields: [roomId], references: [id])
   roomId Int

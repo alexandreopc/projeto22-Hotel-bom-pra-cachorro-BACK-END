@@ -1,3 +1,4 @@
+import { User } from "@prisma/client";
 import * as usersRepository from "../repositories/userRepository.js";
 import * as cryptProvider from "../utils/providers/cryptProvider.js";
 import * as tokenProvider from "../utils/providers/tokenProvider.js";
@@ -33,7 +34,13 @@ export async function login({ email, password }) {
   };
 }
 
-export async function create({ name, email, phoneNumber, password }) {
+export async function create({
+  name,
+  email,
+  phoneNumber,
+  cpf,
+  password,
+}: User) {
   const user = await usersRepository.getByEmail(email);
 
   if (user) {
@@ -49,6 +56,7 @@ export async function create({ name, email, phoneNumber, password }) {
     name,
     email,
     phoneNumber,
+    cpf,
     password: encryptedPassword,
   });
 }
